@@ -1,0 +1,61 @@
+# Project: sortVerify
+# Makefile created by Red Panda C++ 2.7
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Project1_private.res
+OBJ      = main.o testData.o quickSortClass.o dataGenerator.o mergeSortClass.o test.o bubbleSortClass.o runtimeCal.o sortClass.o heapSortClass.o $(RES)
+LINKOBJ  = main.o testData.o quickSortClass.o dataGenerator.o mergeSortClass.o test.o bubbleSortClass.o runtimeCal.o sortClass.o heapSortClass.o $(RES)
+CLEANOBJ  =  main.o testData.o quickSortClass.o dataGenerator.o mergeSortClass.o test.o bubbleSortClass.o runtimeCal.o sortClass.o heapSortClass.o Project1_private.res output\SortVerify.exe
+LIBS     =  -s -static
+INCS     =  
+CXXINCS  =  
+BIN      = output/SortVerify.exe
+CXXFLAGS = $(CXXINCS)  -O2 -pipe
+CFLAGS   = $(INCS)  -O2 -pipe
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp testData.h dataGenerator.h runtimeCal.h sortClass.h test.h mergeSortClass.h heapSortClass.h quickSortClass.h bubbleSortClass.h
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+testData.o: testData.cpp testData.h
+	$(CPP) -c testData.cpp -o testData.o $(CXXFLAGS) 
+
+quickSortClass.o: quickSortClass.cpp quickSortClass.h
+	$(CPP) -c quickSortClass.cpp -o quickSortClass.o $(CXXFLAGS) 
+
+dataGenerator.o: dataGenerator.cpp testData.h dataGenerator.h
+	$(CPP) -c dataGenerator.cpp -o dataGenerator.o $(CXXFLAGS) 
+
+mergeSortClass.o: mergeSortClass.cpp mergeSortClass.h
+	$(CPP) -c mergeSortClass.cpp -o mergeSortClass.o $(CXXFLAGS) 
+
+test.o: test.cpp test.h
+	$(CPP) -c test.cpp -o test.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+bubbleSortClass.o: bubbleSortClass.cpp testData.h dataGenerator.h runtimeCal.h sortClass.h bubbleSortClass.h
+	$(CPP) -c bubbleSortClass.cpp -o bubbleSortClass.o $(CXXFLAGS) 
+
+runtimeCal.o: runtimeCal.cpp runtimeCal.h
+	$(CPP) -c runtimeCal.cpp -o runtimeCal.o $(CXXFLAGS) 
+
+sortClass.o: sortClass.cpp testData.h dataGenerator.h runtimeCal.h sortClass.h
+	$(CPP) -c sortClass.cpp -o sortClass.o $(CXXFLAGS) 
+
+heapSortClass.o: heapSortClass.cpp testData.h dataGenerator.h runtimeCal.h sortClass.h heapSortClass.h
+	$(CPP) -c heapSortClass.cpp -o heapSortClass.o $(CXXFLAGS) 
+
+Project1_private.res: Project1_private.rc 
+	$(WINDRES) -i Project1_private.rc --input-format=rc -o Project1_private.res -O coff 
+
