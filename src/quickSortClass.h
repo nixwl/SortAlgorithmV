@@ -25,7 +25,7 @@ public:
 	double run_NonRecursionAction(); 						// 配置不同的数据并启动排序,非递归的
 	void NonRecursionAction(long long int*, int, int);		// 非递归的 quick Sort 的实现主函数
 	
-	int bgprt(long long int*, int, int);					// bfprt 算法，寻找最优枢轴值（选择第 k 小的元素）
+	int bfprt(long long int*, int, int);					// bfprt 算法，寻找最优枢轴值（选择第 k 小的元素）
 	int updatePartiation(long long int*, int, int, int);	// 新的区间划分函数
 	void updateAction(long long int*, int, int);			// 改进的quick Sort 的实现
 	double run_udateAction(); 								// 配置不同的数据并启动排序,优化的quick sort

@@ -26,6 +26,13 @@ public:
 	void testStableMergeSort();									// 归并排序稳定性测试
 	void testStableQuickSort();									// 快速排序稳定性测试
 	
+	void testValidBubbleSort();
+	void testValidHeapSort();
+	void testValidMergeSort();
+	void testValidQuickSort();
+	void testValidUnQuickSort();
+	void testValidUpQuickSort();
+	
 private:
 	
 };

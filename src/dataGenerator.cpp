@@ -121,8 +121,8 @@ void dataGenerator::genTestDataRadomU(long long int scope){
 void dataGenerator::genTestDataRadom(long long int scope){
 	std::vector<int> result;
 	std::random_device rd;						// 随机数设备，用于生成真随机数
-	std::default_random_engine engine(rd());
-	std::uniform_int_distribution<int> distribution(1, scope);
+	std::default_random_engine engine(rd());	// 通过鼠标、键盘等设备获取真随机数
+	std::uniform_int_distribution<int> distribution(1, scope);	// 设置随机数范围（均匀分布）
 	
 	int size = this->testDataPtr->getSize();
 	// 生成 size 个数据

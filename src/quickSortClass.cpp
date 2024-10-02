@@ -181,22 +181,29 @@ void quickSortClass::recursionAction(long long int* data, int low, int high){
  * @return
  */
 int quickSortClass::partiation(long long int* data, int low, int high){
-	int piv = data[low];
+	int piv = data[low];							// 选取数组最低位作为枢轴
 	while( low < high){
-		while( low < high && data[high] >= piv){
+		// 右指针比枢轴大，向左移动右指针
+		// 遇到比枢轴小的元素停止
+		while( low < high && data[high] >= piv){	
 			high -= 1;
-			this->compareCnt += 1;
+			this->compareCnt += 1;				// 比较计数器自增
 		}
-		data[low] = data[high];
-		
-		while( low < high && data[low] <= piv){
+		// 枢轴右边全是比枢轴大的元素了
+		// 将比枢轴小的元素换到左指针的位置
+		data[low] = data[high];						
+		// 左指针比枢轴小，向右移动左指针
+		// 遇到比枢轴大的元素停止
+		while( low < high && data[low] <= piv){		
 			low += 1;
-			this->compareCnt += 1;
+			this->compareCnt += 1;				// 比较计数器自增
 		}
+		// 枢轴左边全是比枢轴小的元素了
+		// 将比枢轴大的元素换到右指针的位置
 		data[high] = data[low];
-		
-		this -> exchageCnt += 1;
+		this -> exchageCnt += 2;				// 交换计数器自增
 	}
+	// 最后左指针指位置就是枢轴值
 	data[low] = piv;
 	return low;
 }
@@ -248,15 +255,19 @@ void quickSortClass::NonRecursionAction(long long int* data, int low, int high){
  * @return
  */
 int quickSortClass::updatePartiation(long long int* data, int low, int high, int pivIndex){
-	int pivotValue = data[pivIndex];
+	int pivotValue = data[pivIndex];			// 获取枢轴值
 	std::swap(data[pivIndex], data[high - 1]);
-	int storeIndex = low;
+	int storeIndex = low;						// 记录小于枢轴元素的元素的边界索引
 	for (int i = low; i < high - 1; ++i) {
-		if (data[i] < pivotValue) {
-			std::swap(data[i], data[storeIndex]);
+		this->compareCnt += 1;
+		if (data[i] < pivotValue) {				// 如果当前元素小于枢轴元素
+			//将当前元素与 storeIndex 位置的元素交换，确保小于枢轴的元素都在左边
+			std::swap(data[i], data[storeIndex]);	
 			storeIndex++;
+			this->exchageCnt += 1;
 		}
 	}
+	// 将枢轴元素交换到正确的位置
 	std::swap(data[high - 1], data[storeIndex]);
 	return storeIndex;
 }
@@ -267,7 +278,7 @@ int quickSortClass::updatePartiation(long long int* data, int low, int high, int
  * @param
  * @return
  */
-int quickSortClass::bgprt(long long int* data, int low, int high){
+int quickSortClass::bfprt(long long int* data, int low, int high){
 	int size = high - low + 1;
 	// 长度小于 5，直接返回中位数
 	if( size <= 5){	
@@ -291,7 +302,7 @@ int quickSortClass::bgprt(long long int* data, int low, int high){
 		mediumNum += 1;
 	}
 	
-	return bgprt(data, low, mediumNum);
+	return bfprt(data, low, mediumNum);
 }	
 
 
@@ -303,7 +314,7 @@ int quickSortClass::bgprt(long long int* data, int low, int high){
  */
 void quickSortClass::updateAction(long long int* data, int low, int high){
 	if (high - low > 1) {
-		int pivotIndex = bgprt(data, low, high);
+		int pivotIndex = bfprt(data, low, high);
 		pivotIndex = updatePartiation(data, low, high, pivotIndex);
 		updateAction(data, low, pivotIndex);
 		updateAction(data, pivotIndex + 1, high);
@@ -334,7 +345,7 @@ double quickSortClass::run_udateAction(){
  */
 void quickSortClass::validTestRecursionAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
-	std::cout << "  @valid test: quick bubble sort validation test: " << std::endl;
+	std::cout << "  @valid test: quick sort validation test: " << std::endl;
 	std::cout << "  @before quick sort: " << std::endl << "\t";
 	long long int* testStorge = new long long int[20];
 	// 填充有效性验证数据，生成一个倒序序列数据
@@ -360,7 +371,7 @@ void quickSortClass::validTestRecursionAction(){
  */
 void quickSortClass::validTestNonRecursionAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
-	std::cout << "  @valid test: unrecursion quick bubble sort validation test: " << std::endl;
+	std::cout << "  @valid test: unrecursion quick sort validation test: " << std::endl;
 	std::cout << "  @before unrecursion quick sort: " << std::endl << "\t";
 	long long int* testStorge = new long long int[20];
 	// 填充有效性验证数据，生成一个倒序序列数据
@@ -386,7 +397,7 @@ void quickSortClass::validTestNonRecursionAction(){
  */
 void quickSortClass::validUpdateAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
-	std::cout << "  @valid test: updated quick bubble sort validation test: " << std::endl;
+	std::cout << "  @valid test: updated quick sort validation test: " << std::endl;
 	std::cout << "  @before updated quick sort: " << std::endl << "\t";
 	long long int* testStorge = new long long int[20];
 	// 填充逆序数据

@@ -20,6 +20,7 @@ namespace {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(hConsole, colorCode);
 	}
+
 	
 	// global varibles
 	int p1result = 0, p2result = 0;
@@ -96,8 +97,12 @@ namespace {
 			if(command == "runtime"){
 				if(p1.empty())
 					errorhandler(2);
+				
 				if(p2.empty())
 					errorhandler(3);
+				if(!p1.empty() && !p2.empty()){
+					return true;
+				}
 				return false;
 			}
 		}
@@ -137,57 +142,46 @@ int main(int argc, char** argv) {
 		setConsoleColor(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);			// 设置默认输出
 		
 	}else if(command == "valid"){
-		testData* data = new testData();
+		// testData* data = new testData();
 		int result = (p1Switch.find(p1)!= p1Switch.end()) ? p1Switch.find(p1)->second : -1;
 		if(result == -1){
 			errorhandler(4);
 		}
+		test *p = new test();
 		switch (result){
 			case 1:{//bubble
-				bubbleSortClass *b = new bubbleSortClass(data);
-				b->validTest();
-				delete b;
+				p->testValidBubbleSort();
 				break;
 			}
 			case 2:{//heap
-				heapSortClass *b = new heapSortClass(data);
-				b->validTest();
-				delete b;
+				p->testValidHeapSort();
 				break;
 			}
 			case 3:{//merge
-				mergeSortClass *b = new mergeSortClass(data);
-				b->validTest();
-				delete b;
+				p->testValidMergeSort();
 				break;
 			}
 			case 4:{//quick
-				quickSortClass *b = new quickSortClass(data);
-				b->validTestRecursionAction();
-				delete b;
+				p->testValidQuickSort();
 				break;
 			}
 			case 5:{//unquick
-				quickSortClass *b = new quickSortClass(data);
-				b->validTestNonRecursionAction();
-				delete b;
+				p->testValidUnQuickSort();
 				break;
 			}
 			case 6:{//upquick
-				quickSortClass *b = new quickSortClass(data);
-				b->validUpdateAction();
-				delete b;
+				p->testValidUpQuickSort();
 				break;
 			}
 			default:{
 				break;
 			}
 		}
-		delete[] data;
+		delete p;
 	}
 	else if(command == "runtime"){
 		p1result = (p1Switch.find(p1)!= p1Switch.end()) ? p1Switch.find(p1)->second : -1;	// 检查参数 p1 value 是否合法
-		p2result = (p2.empty()) ? std::stoi(p2) : -1;										// 检查参数 p2 value 是否合法
+		p2result = (!p2.empty()) ? std::stoi(p2) : -1;										// 检查参数 p2 value 是否合法
 		if(p1result == -1){
 			errorhandler(4);
 		}

@@ -121,14 +121,14 @@ void test::testBuddleSortRunTime(long long int scope){
 	
 	/* task 1: bubble sort with ordered data*/
 	taskInfo("bubble", "ordered", "1");
-		/* run task 1*/																	// 控制台输出
+		/* run task 1*/																// 控制台输出
 	testObj->getDataGenPtr()->genTestDataOrd();										// 设置顺序数据
 	runTime = testObj->run_action();												// 运行
 	cntOutput(runTime, testObj->getExchageCnt(), testObj->getCompareCnt());			// 结果输出
 		/* clean task 1*/
 	testObj->getDataGenPtr()->cleanTestData();										// 清除容器中的数据
 	testObj->cleanCnt();															// 清除计数器
-	cleanCntOutput("1");																// 控制台输出
+	cleanCntOutput("1");															// 控制台输出
 	
 	
 	/* task 2: bubble sort with reordered data*/
@@ -144,7 +144,7 @@ void test::testBuddleSortRunTime(long long int scope){
 	
 	/* task 3: bubble sort with random data*/
 	taskInfo("bubble", "random", "3");													// 控制台输出
-	testObj->getDataGenPtr()->genTestDataRadomU(scope); 							// 填充随机数据
+	testObj->getDataGenPtr()->genTestDataRadom(scope); 							// 填充随机数据
 	runTime = testObj->run_action();												// 运行
 	cntOutput(runTime, testObj->getExchageCnt(), testObj->getCompareCnt());			// 控制台输出
 }
@@ -529,3 +529,90 @@ void test::testStableQuickSort(){
 	delete p;
 	
 }
+
+/**
+ * bubble 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidBubbleSort(){
+	testData* data = new testData();
+	bubbleSortClass *b = new bubbleSortClass(data);
+	b->validTest();
+	delete b;
+	delete[] data;
+}
+
+/**
+ * heap 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidHeapSort(){
+	testData* data = new testData();
+	heapSortClass * b = new heapSortClass(data);
+	b->validTest();
+	delete b;
+	delete[] data;
+}
+
+/**
+ * merge 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidMergeSort(){
+	testData* data = new testData();
+	mergeSortClass * b = new mergeSortClass(data);
+	b->validTest();
+	delete b;
+	delete[] data;
+}
+
+/**
+ * quick 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidQuickSort(){
+	testData* data = new testData();
+	quickSortClass * b = new quickSortClass(data);
+	b->validTestRecursionAction();
+	delete b;
+	delete[] data;
+}
+
+
+/**
+ * unquick 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidUnQuickSort(){
+	testData* data = new testData();
+	quickSortClass * b = new quickSortClass(data);
+	b->validTestNonRecursionAction();
+	delete b;
+	delete[] data;
+}
+
+/**
+ * unquick 排序的有效验证
+ * @author 
+ * @param
+ * @return
+ */
+void test::testValidUpQuickSort(){
+	testData* data = new testData();
+	quickSortClass * b = new quickSortClass(data);
+	b->validUpdateAction();
+	delete b;
+	delete[] data;
+}
+
+
