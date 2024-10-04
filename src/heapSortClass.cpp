@@ -20,7 +20,7 @@ namespace{
  */
 heapSortClass::heapSortClass(testData* data){
 	this->dataGenPtr = new dataGenerator(data);
-	this->globalRegister = new long long int[1];
+	this->globalRegister = new ll[1];
 	this->exchageCnt = 0;
 	this->compareCnt = 0;
 }
@@ -92,7 +92,7 @@ dataGenerator* heapSortClass::getDataGenPtr(){
  * @param
  * @return
  */
-long long int heapSortClass::getCompareCnt(){
+ll heapSortClass::getCompareCnt(){
 	return this->compareCnt;
 }
 
@@ -124,10 +124,10 @@ void heapSortClass::cleanCnt(){
  * 	- size
  * @return
  */
-void heapSortClass::action(long long int* data, int size){
-	int temp;									// 用于交换的变量
+void heapSortClass::action(ll* data, ll size){
+	ll temp;									// 用于交换的变量
 	buildHeap(data, size);						// 建立大根堆
-	for(int i = size; i > 0; i--){				
+	for(ll i = size; i > 0; i--){				
 		temp = data[i];							// 将堆顶元素与数组末尾元素交换（最大的放到后面，实现增序排序）
 		data[i] = data[0];
 		data[0] = temp;
@@ -144,9 +144,9 @@ void heapSortClass::action(long long int* data, int size){
  * 	- size
  * @return
  */
-void heapSortClass::buildHeap(long long int* data, int size){
+void heapSortClass::buildHeap(ll* data, ll size){
 	// 调整范围是 1 ~ size / 2, 树的上半部分
-	for(int i = size / 2; i >= 0; i--){
+	for(ll i = size / 2; i >= 0; i--){
 		adjustHeap(data, i, size);
 	}
 }
@@ -160,9 +160,9 @@ void heapSortClass::buildHeap(long long int* data, int size){
  * 	- size
  * @return 
  */
-void heapSortClass::adjustHeap(long long int* data, int k, int size){
+void heapSortClass::adjustHeap(ll* data, ll k, ll size){
 	this->globalRegister[0] = data[k];
-	int i;
+	ll i;
 	for(i = 2 * k;i <= size;i *= 2){
 		// 查看，若左孩子小于右孩子，向右孩子下坠（i+=1）得到下坠点data[i]
 		if(i < size && data[i] < data[i+1]) {
@@ -191,8 +191,8 @@ void heapSortClass::adjustHeap(long long int* data, int k, int size){
  * @return
  */
 double heapSortClass::run_action(){
-	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll* data = this->dataGenPtr->getTestData();			// 数据容器
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->beginAccord();											// 启动计时器
 	action(data, size - 1);											// 执行堆排序
 	this->endAccord();												// 关闭计时器
@@ -210,7 +210,7 @@ void heapSortClass::validTest(){
 	std::cout << "  @valid test: begin heap sort validation test: " << std::endl;
 	std::cout << "  @before heap sort: " << std::endl << "\t";
 	// 填充有效性验证数据，生成一个倒序序列数据
-	long long int* testStorge = new long long int[20];
+	ll* testStorge = new long long int[20];
 	for(int i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;
 		std::cout << testStorge[i] << "  ";

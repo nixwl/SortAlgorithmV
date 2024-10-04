@@ -5,6 +5,7 @@
 #include "windows.h"
 #include <vector>
 #include <iostream>
+typedef long long int ll;
 
 class sortClass {
 public:

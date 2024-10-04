@@ -24,7 +24,7 @@ namespace {
 	 * @param
 	 * @return
 	 */
-	void cntOutput(double runTime, long long int exchangCnt, long long int compareCnt){
+	void cntOutput(double runTime, ll exchangCnt, ll compareCnt){
 		setConsoleColor(FOREGROUND_RED| FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 		std::cout << std::endl<<"\t"<< "+------------+------------+------------+\n";
 		std::cout << " \t "<< std::left << std::setw(13) << "Runtime" << std::setw(13) << "Exchange" << std::setw(13) << "Compare" << std::endl;
@@ -114,7 +114,7 @@ namespace {
  * 	- scope: 输入数据的规模
  * @return
  */
-void test::testBuddleSortRunTime(long long int scope){
+void test::testBuddleSortRunTime(ll scope){
 	testData* data = new testData(scope, "testBuddleSortRunTime, size=" + std::to_string(scope));
 	bubbleSortClass* testObj = new bubbleSortClass(data);
 	double runTime;
@@ -156,7 +156,7 @@ void test::testBuddleSortRunTime(long long int scope){
  * 	- scope: 输入数据的规模
  * @return
  */
-void test::testHeapSortRunTime(long long int scope){
+void test::testHeapSortRunTime(ll scope){
 	testData* data = new testData(scope, "testHeapSortRunTime, size=" + std::to_string(scope));
 	heapSortClass* testObj = new heapSortClass(data);
 	double runTime;
@@ -197,7 +197,7 @@ void test::testHeapSortRunTime(long long int scope){
  * 	- scope: 输入数据的规模
  * @return
  */
-void test::testMergeSortRunTime(long long int scope){
+void test::testMergeSortRunTime(ll scope){
 	testData* data = new testData(scope, "testMergeSortRunTime, size=" + std::to_string(scope));
 	mergeSortClass* testObj = new mergeSortClass(data);
 	double runTime;
@@ -238,10 +238,10 @@ void test::testMergeSortRunTime(long long int scope){
  * 	- scope: 输入数据的规模
  * @return
  */
-void test::testQuicSortRunTime(long long int scope){
+void test::testQuicSortRunTime(ll scope){
 	testData* data = new testData(scope, "testQuicSortRunTime, size=" + std::to_string(scope));
 	quickSortClass* testObj = new quickSortClass(data);
-	double runTime;
+	long double runTime;
 	
 	/*task 1: quick sort with ordered data*/
 	taskInfo("quick", "ordered", "1");												// 控制台输出
@@ -251,6 +251,7 @@ void test::testQuicSortRunTime(long long int scope){
 	cntOutput(runTime, testObj->getExchageCnt(), testObj->getCompareCnt());
 		/* clean task 1*/
 	testObj->getDataGenPtr()->cleanTestData();
+	// testObj->getDataGenPtr()->getTestDataClass()->setPos(0);
 	testObj->cleanCnt();
 	cleanCntOutput("1");
 	
@@ -260,7 +261,7 @@ void test::testQuicSortRunTime(long long int scope){
 		/* run task 2*/
 	runTime = testObj->run_recursionAction();
 	cntOutput(runTime, testObj->getExchageCnt(), testObj->getCompareCnt());
-		/* run task 2*/
+		/* clean task 2*/
 	testObj->getDataGenPtr()->cleanTestData();
 	testObj->cleanCnt();
 	cleanCntOutput("2");

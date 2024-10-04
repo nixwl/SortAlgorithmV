@@ -92,7 +92,7 @@ dataGenerator* mergeSortClass::getDataGenPtr(){
  * @param
  * @return
  */
-long long int mergeSortClass::getCompareCnt(){
+ll mergeSortClass::getCompareCnt(){
 	return this->compareCnt;
 }
 
@@ -102,7 +102,7 @@ long long int mergeSortClass::getCompareCnt(){
  * @param
  * @return
  */
-long long int mergeSortClass::getExchageCnt(){
+ll mergeSortClass::getExchageCnt(){
 	return this->exchageCnt;
 }	
 
@@ -126,8 +126,8 @@ void mergeSortClass::cleanCnt(){
  * @return
  */
 double mergeSortClass::run_action(){
-	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll* data = this->dataGenPtr->getTestData();			// 数据容器
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->assistantArr = new long long int[size];					// 创建辅助数组
 	this->beginAccord();											// 启动计时器
 	action(data, 0, size - 1);										// 执行归并排序
@@ -144,9 +144,9 @@ double mergeSortClass::run_action(){
  * @param
  * @return
  */
-void mergeSortClass::action(long long int* data, int low, int high){
+void mergeSortClass::action(ll* data, ll low, ll high){
 	if( low < high){
-		int mid = (low + high) / 2;					// 取数据中间下标索引
+		ll mid = (low + high) / 2;					// 取数据中间下标索引
 		action(data, low, mid);						// 切[low, mid] 间的数据
 		action(data, mid+1, high);					// 切[mid, high] 间的数据
 		merge(data, low, mid, high);				// 合并数据
@@ -160,8 +160,8 @@ void mergeSortClass::action(long long int* data, int low, int high){
  * @param
  * @return
  */
-void mergeSortClass::merge(long long int* data, int low, int mid, int high){
-	int i, j, k;
+void mergeSortClass::merge(ll* data, ll low, ll mid, ll high){
+	ll i, j, k;
 	for(k = 0; k <= high; k++){				
 		this->assistantArr[k] = data[k];	// 将原数组的数据拷贝到辅助数组
 	}
@@ -197,7 +197,7 @@ void mergeSortClass::validTest(){
 	std::cout << "  @valid test: begin merge sort validation test: " << std::endl;
 	std::cout << "  @before merge sort: " << std::endl << "\t";
 	// 填充有效性验证数据，生成一个倒序序列数据
-	long long int* testStorge = new long long int[20];
+	ll* testStorge = new long long int[20];
 	for(int i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;
 		std::cout << testStorge[i] << "  ";

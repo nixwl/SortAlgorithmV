@@ -1,15 +1,17 @@
 #include "quickSortClass.h"
+
 namespace {
+
 	/**
 	 * 用于 bfprt 的直接插排
 	 * @author 
 	 * @param
 	 * @return
 	 */
-	int insertSort(long long int* arr, int low, int high){
-		long long int temp;
+	ll insertSort(ll* arr, ll low, ll high){
+		ll temp;
 		
-		for (int i = low + 1; i <= high; i++) {
+		for (ll i = low + 1; i <= high; i++) {
 			temp= arr[i];
 			int j = i - 1;
 			while(j >= low && arr[j] > temp){
@@ -116,7 +118,7 @@ dataGenerator* quickSortClass::getDataGenPtr(){
  * @param
  * @return
  */
-long long int quickSortClass::getCompareCnt(){
+ll quickSortClass::getCompareCnt(){
 	return this->compareCnt;
 }
 
@@ -126,7 +128,7 @@ long long int quickSortClass::getCompareCnt(){
  * @param
  * @return
  */
-long long int quickSortClass::getExchageCnt(){
+ll quickSortClass::getExchageCnt(){
 	return this->exchageCnt;
 }	
 
@@ -149,10 +151,14 @@ void quickSortClass::cleanCnt(){
  * @return
  */
 double quickSortClass::run_recursionAction(){
-	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll* data = this->dataGenPtr->getTestData();			// 数据容器
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->beginAccord();											// 启动计时器
-	recursionAction(data, 0, size - 1);								// 执行快速排序
+	try{
+		recursionAction(data, 0, size - 1);							// 执行快速排序
+	}catch(const std::bad_alloc& e){
+		std::cerr << "warnging:"<<e.what() << std::endl;
+	}
 	this->endAccord();												// 关闭计时器
 	return this->getRunTime();										// 获取执行时间		
 }
@@ -164,13 +170,13 @@ double quickSortClass::run_recursionAction(){
  * @param
  * @return
  */
-void quickSortClass::recursionAction(long long int* data, int low, int high){
+void quickSortClass::recursionAction(ll* data, ll low, ll high){
 	if( low < high){
 		// 区间划分，将【low,high】拆分为【low,piv-1】【piv+1,high】
 		// 同时，piv 位置的元素即最终排序结果的元素
-		int piv = partiation(data, low, high);
-		recursionAction(data, low, piv - 1);
+		ll piv = partiation(data, low, high);
 		recursionAction(data, piv + 1, high);
+		recursionAction(data, low, piv - 1);
 	}
 }
 
@@ -180,8 +186,8 @@ void quickSortClass::recursionAction(long long int* data, int low, int high){
  * @param
  * @return
  */
-int quickSortClass::partiation(long long int* data, int low, int high){
-	int piv = data[low];							// 选取数组最低位作为枢轴
+ll quickSortClass::partiation(ll* data, ll low, ll high){
+	ll piv = data[low];							// 选取数组最低位作为枢轴
 	while( low < high){
 		// 右指针比枢轴大，向左移动右指针
 		// 遇到比枢轴小的元素停止
@@ -215,8 +221,8 @@ int quickSortClass::partiation(long long int* data, int low, int high){
  * @return
  */
 double quickSortClass::run_NonRecursionAction(){
-	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll* data = this->dataGenPtr->getTestData();			// 数据容器
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->beginAccord();											// 启动计时器
 	this->NonRecursionAction(data, 0, size - 1);					// 执行排序
 	this->endAccord();												// 关闭计时器
@@ -230,8 +236,8 @@ double quickSortClass::run_NonRecursionAction(){
  * @param
  * @return
  */
-void quickSortClass::NonRecursionAction(long long int* data, int low, int high){
-	std::stack<std::pair<int, int>> st;		// 栈存储区间范围
+void quickSortClass::NonRecursionAction(ll* data, ll low, ll high){
+	std::stack<std::pair<ll, ll>> st;		// 栈存储区间范围
 	st.push({low, high});					// 初始区间范围为[low, high], 入栈					
 	while(!st.empty()){
 		// 从栈中取出区间
@@ -241,7 +247,7 @@ void quickSortClass::NonRecursionAction(long long int* data, int low, int high){
 		// 区间划分，将【low,high】拆分为【low,piv-1】【piv+1,high】
 		// 同时，piv 位置的元素即最终排序结果的元素
 		if ( low < high){
-			int piv = partiation(data, low, high);
+			ll piv = partiation(data, low, high);
 			st.push({low, piv - 1});		// [low, piv - 1]区间入栈	
 			st.push({piv + 1, high});		// [piv + 1, high]区间入栈
 		}
@@ -254,11 +260,11 @@ void quickSortClass::NonRecursionAction(long long int* data, int low, int high){
  * @param
  * @return
  */
-int quickSortClass::updatePartiation(long long int* data, int low, int high, int pivIndex){
-	int pivotValue = data[pivIndex];			// 获取枢轴值
+ll quickSortClass::updatePartiation(ll* data, ll low, ll high, ll pivIndex){
+	ll pivotValue = data[pivIndex];			// 获取枢轴值
 	std::swap(data[pivIndex], data[high - 1]);
-	int storeIndex = low;						// 记录小于枢轴元素的元素的边界索引
-	for (int i = low; i < high - 1; ++i) {
+	ll storeIndex = low;						// 记录小于枢轴元素的元素的边界索引
+	for (ll i = low; i < high - 1; ++i) {
 		this->compareCnt += 1;
 		if (data[i] < pivotValue) {				// 如果当前元素小于枢轴元素
 			//将当前元素与 storeIndex 位置的元素交换，确保小于枢轴的元素都在左边
@@ -278,15 +284,15 @@ int quickSortClass::updatePartiation(long long int* data, int low, int high, int
  * @param
  * @return
  */
-int quickSortClass::bfprt(long long int* data, int low, int high){
-	int size = high - low + 1;
+ll quickSortClass::bfprt(ll* data, ll low, ll high){
+	ll size = high - low + 1;
 	// 长度小于 5，直接返回中位数
 	if( size <= 5){	
 		return insertSort(data, low, high);
 	}
 	
-	int start = low;
-	int mediumNum = low;
+	ll start = low;
+	ll mediumNum = low;
 	// 从 start 开始, 每 5 个为一组, 找中位数
 	while(start + 5 < high){
 		insertSort(data, start, start + 4);
@@ -297,7 +303,7 @@ int quickSortClass::bfprt(long long int* data, int low, int high){
 	
 	if(start < high){
 		insertSort(data, start, high);
-		int _low = high - start;
+		ll _low = high - start;
 		std::swap(data[mediumNum], data[start + _low / 2]);
 		mediumNum += 1;
 	}
@@ -312,9 +318,9 @@ int quickSortClass::bfprt(long long int* data, int low, int high){
  * @param
  * @return
  */
-void quickSortClass::updateAction(long long int* data, int low, int high){
+void quickSortClass::updateAction(ll* data, ll low, ll high){
 	if (high - low > 1) {
-		int pivotIndex = bfprt(data, low, high);
+		ll pivotIndex = bfprt(data, low, high);
 		pivotIndex = updatePartiation(data, low, high, pivotIndex);
 		updateAction(data, low, pivotIndex);
 		updateAction(data, pivotIndex + 1, high);
@@ -328,8 +334,8 @@ void quickSortClass::updateAction(long long int* data, int low, int high){
  * @return
  */
 double quickSortClass::run_udateAction(){
-	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll* data = this->dataGenPtr->getTestData();			// 数据容器
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->beginAccord();											// 启动计时器
 	updateAction(data, 0, size - 1);								// 执行快速排序
 	this->endAccord();												// 关闭计时器
@@ -347,7 +353,7 @@ void quickSortClass::validTestRecursionAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
 	std::cout << "  @valid test: quick sort validation test: " << std::endl;
 	std::cout << "  @before quick sort: " << std::endl << "\t";
-	long long int* testStorge = new long long int[20];
+	ll* testStorge = new long long int[20];
 	// 填充有效性验证数据，生成一个倒序序列数据
 	for(int i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;
@@ -373,7 +379,7 @@ void quickSortClass::validTestNonRecursionAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
 	std::cout << "  @valid test: unrecursion quick sort validation test: " << std::endl;
 	std::cout << "  @before unrecursion quick sort: " << std::endl << "\t";
-	long long int* testStorge = new long long int[20];
+	ll* testStorge = new long long int[20];
 	// 填充有效性验证数据，生成一个倒序序列数据
 	for(int i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;
@@ -399,7 +405,7 @@ void quickSortClass::validUpdateAction(){
 	setConsoleColor(FOREGROUND_RED | FOREGROUND_INTENSITY);
 	std::cout << "  @valid test: updated quick sort validation test: " << std::endl;
 	std::cout << "  @before updated quick sort: " << std::endl << "\t";
-	long long int* testStorge = new long long int[20];
+	ll* testStorge = new long long int[20];
 	// 填充逆序数据
 	for(int i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;

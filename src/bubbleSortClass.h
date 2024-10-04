@@ -14,18 +14,18 @@ public:
 
 	double run_action(); 						// 配置不同的数据并启动排序
 	void cleanCnt();							// 清除若干计数器
-	void action(long long int*, int);			// bubbleSort 的实现
+	void action(ll*, ll);			// bubbleSort 的实现
 	
 	dataGenerator* getDataGenPtr();				// 获取dataGenPtr
-	int getCompareCnt();						// 获取searchCnt
-	int getExchageCnt();						// 获取exchageCnt
+	ll getCompareCnt();						// 获取searchCnt
+	ll getExchageCnt();						// 获取exchageCnt
 	
 	bubbleSortClass(testData* data);			// 构造
 	~bubbleSortClass();							// 析构
 private:
 	dataGenerator* dataGenPtr;
-	long long int compareCnt;
-	long long int exchageCnt;
+	ll compareCnt;
+	ll exchageCnt;
 };
 
 #endif

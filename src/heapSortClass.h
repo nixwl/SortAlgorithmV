@@ -15,22 +15,22 @@ public:
 	void cleanCnt();							// 清除若干计数器
 	
 	double run_action(); 						// 配置不同的数据并启动排序
-	void action(long long int*, int);			// heapSort 的实现,主函数
-	void buildHeap(long long int*, int);		// 建堆函数
-	void adjustHeap(long long int*, int, int);	// 调整堆
+	void action(ll*, ll);			// heapSort 的实现,主函数
+	void buildHeap(ll*, ll);		// 建堆函数
+	void adjustHeap(ll*, ll, ll);	// 调整堆
 	
 	dataGenerator* getDataGenPtr();				// 获取dataGenPtr
-	long long int getCompareCnt();				// 获取compareCnt
-	long long int getExchageCnt();				// 获取exchageCnt
+	ll getCompareCnt();				// 获取compareCnt
+	ll getExchageCnt();				// 获取exchageCnt
 	
 	heapSortClass(testData* data);				// 构造
 	~heapSortClass();							// 析构
 	
 private:
 	dataGenerator* dataGenPtr;
-	long long int compareCnt;
-	long long int exchageCnt;
-	long long int* globalRegister;
+	ll compareCnt;
+	ll exchageCnt;
+	ll* globalRegister;
 };
 
 #endif

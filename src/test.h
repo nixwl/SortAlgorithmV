@@ -14,12 +14,12 @@
 
 class test {
 public:
-	void testBuddleSortRunTime(long long int scope);			// 测试冒泡排序对不同序列的数据排序的运行时间性能
-	void testHeapSortRunTime(long long int scope);				// 测试堆排序对不同序列的数据排序的运行时间性能
-	void testMergeSortRunTime(long long int scope);				// 测试归并排序对不同序列的数据排序的运行时间性能
-	void testQuicSortRunTime(long long int scope);				// 测试快速排序（递归）对不同序列的数据排序的运行时间性能
-	void testQuicSortNonRecursionAction(long long int scope);	// 测试快速排序（非递归）对不同序列的数据排序的运行时间性能
-	void testQuicSortUpdateAction(long long int scope);			// 测试快速排序（改进的）对不同序列的数据排序的运行时间性能
+	void testBuddleSortRunTime(ll scope);			// 测试冒泡排序对不同序列的数据排序的运行时间性能
+	void testHeapSortRunTime(ll scope);				// 测试堆排序对不同序列的数据排序的运行时间性能
+	void testMergeSortRunTime(ll scope);				// 测试归并排序对不同序列的数据排序的运行时间性能
+	void testQuicSortRunTime(ll scope);				// 测试快速排序（递归）对不同序列的数据排序的运行时间性能
+	void testQuicSortNonRecursionAction(ll scope);	// 测试快速排序（非递归）对不同序列的数据排序的运行时间性能
+	void testQuicSortUpdateAction(ll scope);			// 测试快速排序（改进的）对不同序列的数据排序的运行时间性能
 	
 	void testStableBubbleSort();								// 冒泡排序稳定性测试
 	void testStableHeapSort();									// 堆排序稳定性测试

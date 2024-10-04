@@ -56,8 +56,8 @@ void bubbleSortClass::beginAccord(){
  */
 void bubbleSortClass::endAccord(){
 	setConsoleColor(FOREGROUND_GREEN| FOREGROUND_RED | FOREGROUND_INTENSITY);
-	std::cout << "  @timer >> bubble sort closed timer" << std::endl;
 	this->getRunTimeImpl()->setEndTime();
+	std::cout << "  @timer >> bubble sort closed timer" << std::endl;
 	setConsoleColor(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);			// 设置默认输出
 }
 
@@ -91,7 +91,7 @@ dataGenerator* bubbleSortClass::getDataGenPtr(){
  * @param
  * @return
  */
-int bubbleSortClass::getCompareCnt(){
+ll bubbleSortClass::getCompareCnt(){
 	return this->compareCnt;
 }
 	
@@ -102,7 +102,7 @@ int bubbleSortClass::getCompareCnt(){
  * @param
  * @return
  */	
-int bubbleSortClass::getExchageCnt(){
+ll bubbleSortClass::getExchageCnt(){
 	return this->exchageCnt;
 }
 
@@ -115,7 +115,7 @@ int bubbleSortClass::getExchageCnt(){
  */
 double bubbleSortClass::run_action(){
 	long long int* data = this->dataGenPtr->getTestData();			// 数据容器
-	int size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
+	ll size = this->dataGenPtr->getTestDataClass()->getSize();		// 数据规模
 	this->beginAccord();											// 启动计时器
 	action(data, size);												// 执行冒泡排序
 	this->endAccord();												// 关闭计时器
@@ -140,11 +140,11 @@ void bubbleSortClass::cleanCnt(){
  * @param
  * @return
  */
-void bubbleSortClass::action(long long int* data, int size){
-	int temp;														// 用于交换的寄存器
-	for(int i = 0; i < size -1; i++){								// 交换从后到前进行
+void bubbleSortClass::action(ll* data, ll size){
+	ll temp;														// 用于交换的寄存器
+	for(ll i = 0; i < size -1; i++){								// 交换从后到前进行
 		bool flag = false;											// 标识是否存在交换行为
-		for(int j = size - 1; j > i ; j--){
+		for(ll j = size - 1; j > i ; j--){
 			if(data[j-1] > data[j]){								// 交换并设置标志
 				temp = data[j];
 				data[j] = data[j-1];
@@ -171,8 +171,8 @@ void bubbleSortClass::validTest(){
 	std::cout << "  @valid test: begin bubble sort validation test: " << std::endl;
 	std::cout << "  @before bubble sort: " << std::endl << "\t";
 	// 填充有效性验证数据，生成一个倒序序列数据
-	long long int* testStorge = new long long int[20];
-	for(int i = 0, begin=20; i < 20; i++){
+	ll* testStorge = new ll[20];
+	for(ll i = 0, begin=20; i < 20; i++){
 		testStorge[i] = begin--;
 		std::cout << testStorge[i] << "  ";
 	}
@@ -180,7 +180,7 @@ void bubbleSortClass::validTest(){
 	action(testStorge, 20);
 	// 输出排序后的结果
 	std::cout << std::endl << "  @after bubble sort: " << std::endl << "\t";
-	for(int i = 0; i < 20; i++){
+	for(ll i = 0; i < 20; i++){
 		std::cout << testStorge[i] << "  ";
 	}
 	setConsoleColor(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);			// 设置默认输出

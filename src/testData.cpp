@@ -18,7 +18,7 @@ testData::testData():info("default testDataStorage, size=10\n"), size(10), pos(0
  * @return
  */
 testData::testData(long long int size, std::string info): info(info), size(size), pos(0){
-	this->storge = new long long int[size];
+	this->storge = new ll[size];
 }
 
 /**
@@ -47,7 +47,7 @@ std::string testData::getInfo(){
  * @param
  * @return
  */
-long long int* testData::getStorge(){
+ll* testData::getStorge(){
 	return this->storge;
 }
 
@@ -57,7 +57,7 @@ long long int* testData::getStorge(){
  * @param
  * @return
  */
-long long int testData::getSize(){
+ll testData::getSize(){
 	return this->size;
 }
 
@@ -67,7 +67,7 @@ long long int testData::getSize(){
  * @param
  * @return
  */
-long long int testData::getPos(){
+ll testData::getPos(){
 	return this->pos;
 }
 
@@ -89,7 +89,7 @@ void testData::setInfo(std::string info){
  * @param
  * @return
  */
-void testData::setSize(long long int size){
+void testData::setSize(ll size){
 	this->size = size;
 }
 
@@ -100,7 +100,7 @@ void testData::setSize(long long int size){
  * @param
  * @return
  */
-void testData::setStorage(long long int item){
+void testData::setStorage(ll item){
 	this->storge[pos] = item;
 	pos++;
 }
@@ -112,7 +112,7 @@ void testData::setStorage(long long int item){
  * @return
  */
 void testData::cleanStorge(){
-	for(int i = 0; i < this->size; i++){
+	for(ll i = 0; i < this->size; i++){
 		this->storge[i] = 0;
 	}
 	pos = 0;
@@ -124,7 +124,7 @@ void testData::cleanStorge(){
  * @param
  * @return
  */
-void testData::setPos(long long int pos){
+void testData::setPos(ll pos){
 	this->pos = pos;
 }
 	

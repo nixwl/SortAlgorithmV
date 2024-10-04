@@ -39,7 +39,7 @@ testData* dataGenerator::getTestDataClass(){
  * @param
  * @return
  */
-long long int* dataGenerator::getTestData(){
+ll* dataGenerator::getTestData(){
 	return this->testDataPtr->storge;
 }
 
@@ -50,9 +50,9 @@ long long int* dataGenerator::getTestData(){
  * @return
  */
 void dataGenerator::genTestDataOrd(){
-	long long int size = this->testDataPtr->getSize();
-	long long int item = 1;
-	for(long long int pos = this->testDataPtr->getPos(); pos < size; pos++){
+	ll size = this->testDataPtr->getSize();
+	ll item = 1;
+	for(ll pos = this->testDataPtr->getPos(); pos < size; pos++){
 		this->testDataPtr->setStorage(item++);
 	}
 }
@@ -64,9 +64,9 @@ void dataGenerator::genTestDataOrd(){
  * @return
  */
 void dataGenerator::genTestDataRord(){
-	int size = this->testDataPtr->getSize();
-	int item = size;
-	for(int pos = this->testDataPtr->getPos(); pos < size; pos++){
+	ll size = this->testDataPtr->getSize();
+	ll item = size;
+	for(ll pos = this->testDataPtr->getPos(); pos < size; pos++){
 		this->testDataPtr->setStorage(item--);
 	}
 }
@@ -79,16 +79,16 @@ void dataGenerator::genTestDataRord(){
  * 	- scope: 生成数据的规模
  * @return
  */
-void dataGenerator::genTestDataRadomU(long long int scope){
-	std::vector<int> result;
+void dataGenerator::genTestDataRadomU(ll scope){
+	std::vector<ll> result;
 	std::random_device rd;						// 随机数设备，用于生成真随机数
 	std::default_random_engine engine(rd());
-	std::uniform_int_distribution<int> distribution(1, scope);
+	std::uniform_int_distribution<ll> distribution(1, scope);
 	
-	int size = this->testDataPtr->getSize();
+	ll size = this->testDataPtr->getSize();
 	// 生成 size 个数据
-	while((int)result.size() < size){
-		int randNum = distribution(engine);
+	while((ll)result.size() < size){
+		ll randNum = distribution(engine);
 		bool isUnique = true;
 		// 确保数据不重复
 		for(auto item : result){
@@ -103,8 +103,8 @@ void dataGenerator::genTestDataRadomU(long long int scope){
 	}
 	
 	// 将数据装入 testData, 从 pos 开始装填
-	for(int item = 0, pos = this->testDataPtr->getPos()
-		; pos < size && item < (int)result.size()
+	for(ll item = 0, pos = this->testDataPtr->getPos()
+		; pos < size && item < (ll)result.size()
 		; pos++){
 		this->testDataPtr->setStorage(result[item++]); 
 	}
@@ -118,20 +118,20 @@ void dataGenerator::genTestDataRadomU(long long int scope){
  * 	- scope: 生成数据的规模
  * @return
  */
-void dataGenerator::genTestDataRadom(long long int scope){
-	std::vector<int> result;
+void dataGenerator::genTestDataRadom(ll scope){
+	std::vector<ll> result;
 	std::random_device rd;						// 随机数设备，用于生成真随机数
 	std::default_random_engine engine(rd());	// 通过鼠标、键盘等设备获取真随机数
-	std::uniform_int_distribution<int> distribution(1, scope);	// 设置随机数范围（均匀分布）
+	std::uniform_int_distribution<ll> distribution(1, scope);	// 设置随机数范围（均匀分布）
 	
-	int size = this->testDataPtr->getSize();
+	ll size = this->testDataPtr->getSize();
 	// 生成 size 个数据
-	while((int)result.size() < size){
+	while((ll)result.size() < size){
 		result.push_back(distribution(engine));
 	}
 	// 将数据装入 testData, 从 pos 开始装填
-	for(int item = 0, pos = this->testDataPtr->getPos()
-		; pos < size && item < (int)result.size()
+	for(ll item = 0, pos = this->testDataPtr->getPos()
+		; pos < size && item < (ll)result.size()
 		; pos++){
 		this->testDataPtr->setStorage(result[item++]); 
 	}

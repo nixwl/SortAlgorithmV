@@ -4,6 +4,7 @@
 #include "sortClass.h"
 #include <iostream>
 #include <vector>
+#include <error.h>
 #include <stack>
 
 class quickSortClass : public sortClass {
@@ -19,29 +20,29 @@ public:
 	void cleanCnt();							// 清除若干计数器
 	
 	double run_recursionAction(); 						// 配置不同的数据并启动排序,递归的
-	void recursionAction(long long int*, int, int);		// 递归的 quick Sort 的实现主函数
-	int partiation(long long int*, int, int);			// 区间划分函数
+	void recursionAction(ll*, ll, ll);		// 递归的 quick Sort 的实现主函数
+	ll partiation(ll*, ll, ll);				// 区间划分函数
 	
 	double run_NonRecursionAction(); 						// 配置不同的数据并启动排序,非递归的
-	void NonRecursionAction(long long int*, int, int);		// 非递归的 quick Sort 的实现主函数
+	void NonRecursionAction(ll*, ll, ll);		// 非递归的 quick Sort 的实现主函数
 	
-	int bfprt(long long int*, int, int);					// bfprt 算法，寻找最优枢轴值（选择第 k 小的元素）
-	int updatePartiation(long long int*, int, int, int);	// 新的区间划分函数
-	void updateAction(long long int*, int, int);			// 改进的quick Sort 的实现
+	ll bfprt(ll*, ll, ll);					// bfprt 算法，寻找最优枢轴值（选择第 k 小的元素）
+	ll updatePartiation(ll*, ll, ll, ll);	// 新的区间划分函数
+	void updateAction(ll*, ll, ll);			// 改进的quick Sort 的实现
 	double run_udateAction(); 								// 配置不同的数据并启动排序,优化的quick sort
 	
 	dataGenerator* getDataGenPtr();				// 获取dataGenPtr
-	long long int getCompareCnt();				// 获取compareCnt
-	long long int getExchageCnt();				// 获取exchageCnt
+	ll getCompareCnt();				// 获取compareCnt
+	ll getExchageCnt();				// 获取exchageCnt
 	
 	quickSortClass(testData* data);		
 	~quickSortClass();
 	
 private:
 	dataGenerator* dataGenPtr;
-	long long int* assistantArr;
-	long long int compareCnt;
-	long long int exchageCnt;
+	ll* assistantArr;
+	ll compareCnt;
+	ll exchageCnt;
 };
 
 #endif
